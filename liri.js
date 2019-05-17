@@ -73,6 +73,8 @@ function runCommand(cmdType){
                 }
             });
             break;
+        default:
+            console.log("Input command not recognized.");
     }
 }
 
