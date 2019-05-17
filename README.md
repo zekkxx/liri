@@ -10,25 +10,33 @@ Screenshots/README will be the source of this content, utilize this to teach peo
 # Instructions:
 1. Utilize `npm init -y` to initialize your pacakge.json  
 2. Make a .gitignore and add:  
-    ```node_modules
-       .DS_Store
-       .env```  
+  ```
+    node_modules
+    .DS_Store
+    .env
+  ```  
 3. Make a javascript file keys.js  
-  ```console.log('this is loaded');
-     exports.spotify = {
-         id: process.env.SPOTIFY_ID,
-         secret: process.env.SPOTIFY_SECRET
-     };```  
+  ```
+    console.log('this is loaded');
+    exports.spotify = {
+      id: process.env.SPOTIFY_ID,
+      secret: process.env.SPOTIFY_SECRET
+    };
+  ```  
 4. Make a .env and add:  
-  ```# Spotify API keys
-     SPOTIFY_ID=your-spotify-id
-     SPOTIFY_SECRET=your-spotify-secret```  
+  ```
+    # Spotify API keys
+    SPOTIFY_ID=your-spotify-id
+    SPOTIFY_SECRET=your-spotify-secret
+  ```  
 //If someone wants to clone and run the app themselves they will need to supply their own .env file  
-5. Make a file random.txt and write the following 'spotify-this-song,"I want it That Way"'  
+5. Make a file random.txt and write the following `spotify-this-song,"I want it That Way"`  
 6. Make a javascript file liri.js and add:  
-  ```require("dotenv").config();
-     var keys = require("./keys.js");
-     var spotify = new Spotify(keys.spotify);```  
+  ```
+    require("dotenv").config();
+    var keys = require("./keys.js");
+    var spotify = new Spotify(keys.spotify);
+  ```  
 7. Allow liri to take the following commands:  
   `concert-this`  
     -`node liri.js concert-this <artist/band name>`  
