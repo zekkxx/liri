@@ -1,8 +1,8 @@
 //Instantiate Dependencies
 require("dotenv").config();
 var keys = require("./keys.js");
-//var Spotify = require("node-spotify-api");
-//var spotify = new Spotify(keys.spotify);
+var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var moment = require("moment");
 var fs = require("fs");
@@ -29,6 +29,21 @@ function runCommand(cmdType){
             if(cmdParam == undefined){
                 cmdParam = "The Sign";
             }
+            spotify.search({ type: 'track', query: cmdParam, limit: 1 })
+            .then(function(response) {
+                for(let i=0; i<response.tracks.items.length; i++){
+                    var artistString = "";
+                    console.log("Song Title: " + response.tracks.items[i].name);
+                    for(let artist = 0; artist<response.tracks.items[i].artists.length; artist++){
+                        artistString += " " + response.tracks.items[i].artists[artist].name + ",";
+                    }
+                    console.log("Artists:" + artistString);
+                    console.log("Album: " + response.tracks.items[i].album.name);
+                    console.log("Preview URL: " + response.tracks.items[i].preview_url);
+                }
+            }).catch(function(err) {
+                console.log(err);
+            });
             break;
         case "concert-this":
             if(cmdParam == undefined){
@@ -74,7 +89,11 @@ function runCommand(cmdType){
             });
             break;
         default:
-            console.log("Input command not recognized.");
+            console.log("Input command not recognized. Available functions:");
+            console.log("do-what-it-says");
+            console.log("movie-this '<Movie Title>'");
+            console.log("concert-this '<Band Name>'");
+            console.log("sportify-this-song '<Song Title>'");
     }
 }
 
