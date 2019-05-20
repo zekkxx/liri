@@ -32,6 +32,7 @@ function spotSong(){
     spotify.search({ type: 'track', query: cmdParam, limit: 1 }) //Get one track from spotify
     .then(function(response) {
         for(let i=0; i<response.tracks.items.length; i++){ // for each track in spotify response
+            console.log("==================================================");
             var artistString = ""; //clear the artists available
             console.log("Song Title: " + response.tracks.items[i].name);
             for(let artist = 0; artist<response.tracks.items[i].artists.length; artist++){
@@ -40,6 +41,7 @@ function spotSong(){
             console.log("Artists:" + artistString);
             console.log("Album: " + response.tracks.items[i].album.name);
             console.log("Preview URL: " + response.tracks.items[i].preview_url);
+            console.log("==================================================");
         }
     }).catch(function(err) {
         console.log(err); //If error received, give error
@@ -53,12 +55,13 @@ function concertBand(){
     var queryUrl = "https://rest.bandsintown.com/artists/" + cmdParam + "/events?app_id=codingbootcamp";
     axios.get(queryUrl).then(function(response){ //get response from bandsintown
         for(let i=0; i<response.data.length; i++){ //for each item in response
+            console.log("==================================================");
             console.log("Concert #" + (i + 1)); //Title as a concert #
             console.log("Venue: " + response.data[i].venue.name) //Give the venue name
             console.log("Location: " + response.data[i].venue.city //Give the venue city
             + ", " + response.data[i].venue.region); //and its state
             console.log(moment(response.data[i].datetime).format("MMM, Do YYYY, HH:mm")); //Give the time
-            console.log(" "); //Make a blank line
+            console.log("==================================================");
         }
     });
 }
@@ -69,6 +72,7 @@ function postMovie(){
     }
     var queryUrl = "http://www.omdbapi.com/?t=" + cmdParam + "&y=&plot=short&apikey=trilogy";
     axios.get(queryUrl).then(function(response){ //get response from omdbapi
+        console.log("==================================================");
         console.log("Movie Title: "+response.data.Title);
         console.log("Release Year: "+response.data.Year);
         console.log("OMDB Rating: "+response.data.Ratings[0].Value);
@@ -77,6 +81,7 @@ function postMovie(){
         console.log("Languages: "+response.data.Language);
         console.log("Plot: "+response.data.Plot);
         console.log("Actors: "+response.data.Actors);
+        console.log("==================================================");
     });
 }
 
@@ -110,11 +115,13 @@ function runCommand(cmdType){
             doWhatRandomSays();
             break;
         default: //If command not recognized, give information on what commands are available
+            console.log("==================================================");
             console.log("Input command not recognized. Available functions:");
             console.log("do-what-it-says");
             console.log("movie-this '<Movie Title>'");
             console.log("concert-this '<Band Name>'");
             console.log("sportify-this-song '<Song Title>'");
+            console.log("==================================================");
     }
 }
 
