@@ -80,15 +80,18 @@ function postMovie(){
     });
 }
 
-fs.readFile("random.txt", "utf8", function(err, data){ //read random.txt
-    if(err){ //if error occurs
-        console.log(err); //show error
-    } else {
-        var dataArr = data.split(","); //creat an array split on the ','
-        cmdParam = dataArr[1]; //Because each case can take undefined
-        runCommand(dataArr[0]); //We can pass undefined along in recursion
-    }
-});
+function doWhatRandomSays(){
+    fs.readFile("random.txt", "utf8", function(err, data){ //read random.txt
+        if(err){ //if error occurs
+            console.log(err); //show error
+        } else {
+            var dataArr = data.split(","); //creat an array split on the ','
+            cmdParam = dataArr[1]; //Because each case can take undefined
+            runCommand(dataArr[0]); //We can pass undefined along in recursion
+        }
+    });
+}
+
 
 function runCommand(cmdType){
     logFile(cmdType);
