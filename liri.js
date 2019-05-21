@@ -52,6 +52,7 @@ function concertBand(){
     if(cmdParam == undefined){
         cmdParam = "Nickleback"; //if no parameter, parameter is Nickleback
     }
+    console.log("Looking for available " + cmdParam + " concerts.");
     var queryUrl = "https://rest.bandsintown.com/artists/" + cmdParam + "/events?app_id=codingbootcamp";
     axios.get(queryUrl).then(function(response){ //get response from bandsintown
         for(let i=0; i<response.data.length; i++){ //for each item in response
@@ -92,7 +93,11 @@ function doWhatRandomSays(){
         } else {
             var dataArr = data.split(","); //creat an array split on the ','
             cmdParam = dataArr[1]; //Because each case can take undefined
-            runCommand(dataArr[0]); //We can pass undefined along in recursion
+            if(dataArr[0] == "do-what-it-says"){
+                console.log("Information in random.txt will incur an endless recursion loop. Please revise that information.");
+            } else {
+                runCommand(dataArr[0]); //We can pass undefined along in recursion
+            }
         }
     });
 }
@@ -120,7 +125,7 @@ function runCommand(cmdType){
             console.log("do-what-it-says");
             console.log("movie-this '<Movie Title>'");
             console.log("concert-this '<Band Name>'");
-            console.log("sportify-this-song '<Song Title>'");
+            console.log("spotify-this-song '<Song Title>'");
             console.log("==================================================");
     }
 }
